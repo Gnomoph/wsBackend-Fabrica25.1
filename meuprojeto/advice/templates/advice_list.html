@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Conselhos</title>
+</head>
+<body>
+    <h1>Lista de Conselhos</h1>
+    <a href="{% url 'advice_create' %}?fetch=true">Criar Novo Conselho (buscar da API)</a> |
+    <a href="{% url 'advice_create' %}">Criar Manualmente</a>
+    <ul>
+        {% for advice in advices %}
+            <li>
+                <a href="{% url 'advice_detail' advice.pk %}">{{ advice.text|truncatewords:10 }}</a>
+                (<a href="{% url 'advice_update' advice.pk %}">Editar</a> |
+                 <a href="{% url 'advice_delete' advice.pk %}">Excluir</a>)
+            </li>
+        {% empty %}
+            <li>Nenhum conselho cadastrado.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
